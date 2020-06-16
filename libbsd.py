@@ -2952,6 +2952,7 @@ class user_space(builder.Module):
                 'lib/libc/gen/getdomainname.c',
                 'lib/libc/gen/gethostname.c',
                 'lib/libc/gen/sethostname.c',
+                'lib/libc/gen/confstr.c',
                 'lib/libc/inet/inet_addr.c',
                 'lib/libc/inet/inet_cidr_ntop.c',
                 'lib/libc/inet/inet_cidr_pton.c',

@@ -50,7 +50,7 @@ confstr(int name, char *buf, size_t len)
 
 	switch (name) {
 	case _CS_PATH:
-		p = _PATH_STDPATH;
+		p = _PATH_DEV;
 		goto docopy;
 
 		/*
@@ -81,23 +81,15 @@ confstr(int name, char *buf, size_t len)
 	case _CS_POSIX_V6_ILP32_OFFBIG_CFLAGS:
 	case _CS_POSIX_V6_ILP32_OFFBIG_LDFLAGS:
 	case _CS_POSIX_V6_ILP32_OFFBIG_LIBS:
-		if (sizeof(long) * CHAR_BIT == 32 &&
-		    sizeof(off_t) > sizeof(long))
-			p = "";
-		else
-			p = UPE;
-		goto docopy;
+		
+                p = UPE;
+	        goto docopy;
 
 	case _CS_POSIX_V6_LP64_OFF64_CFLAGS:
 	case _CS_POSIX_V6_LP64_OFF64_LDFLAGS:
 	case _CS_POSIX_V6_LP64_OFF64_LIBS:
-		if (sizeof(long) * CHAR_BIT >= 64 &&
-		    sizeof(void *) * CHAR_BIT >= 64 &&
-		    sizeof(int) * CHAR_BIT >= 32 &&
-		    sizeof(off_t) >= sizeof(long))
-			p = "";
-		else
-			p = UPE;
+		
+		p = UPE;
 		goto docopy;
 
 	case _CS_POSIX_V6_WIDTH_RESTRICTED_ENVS:

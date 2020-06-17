@@ -49,10 +49,11 @@ confstr(int name, char *buf, size_t len)
 	const char UPE[] = "unsupported programming environment";
 
 	switch (name) {
+#ifndef __rtems__
 	case _CS_PATH:
 		p = _PATH_STDPATH;
 		goto docopy;
-
+#endif
 		/*
 		 * POSIX/SUS ``Programming Environments'' stuff
 		 *
@@ -81,25 +82,29 @@ confstr(int name, char *buf, size_t len)
 	case _CS_POSIX_V6_ILP32_OFFBIG_CFLAGS:
 	case _CS_POSIX_V6_ILP32_OFFBIG_LDFLAGS:
 	case _CS_POSIX_V6_ILP32_OFFBIG_LIBS:
-		if (sizeof(long) * CHAR_BIT == 32 &&
+#ifndef __rtems__	
+	if (sizeof(long) * CHAR_BIT == 32 &&
 		    sizeof(off_t) > sizeof(long))
 			p = "";
 		else
+#endif
 			p = UPE;
 		goto docopy;
 
 	case _CS_POSIX_V6_LP64_OFF64_CFLAGS:
 	case _CS_POSIX_V6_LP64_OFF64_LDFLAGS:
 	case _CS_POSIX_V6_LP64_OFF64_LIBS:
+#ifndef __rtems__
 		if (sizeof(long) * CHAR_BIT >= 64 &&
 		    sizeof(void *) * CHAR_BIT >= 64 &&
 		    sizeof(int) * CHAR_BIT >= 32 &&
 		    sizeof(off_t) >= sizeof(long))
 			p = "";
 		else
+#endif
 			p = UPE;
 		goto docopy;
-
+#ifndef __rtems__
 	case _CS_POSIX_V6_WIDTH_RESTRICTED_ENVS:
 		/* XXX - should have more complete coverage */
 		if (sizeof(long) * CHAR_BIT >= 64)
@@ -107,6 +112,7 @@ confstr(int name, char *buf, size_t len)
 		else
 			p = "_POSIX_V6_ILP32_OFFBIG";
 		goto docopy;
+#endif
 
 docopy:
 		if (len != 0 && buf != NULL)

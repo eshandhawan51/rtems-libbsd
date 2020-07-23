@@ -5339,6 +5339,7 @@ class tests(builder.Module):
         self.addTest(mm.generator['test']('ipsec01', ['test_main']))
         self.addTest(mm.generator['test']('openssl01', ['test_main']))
         self.addTest(mm.generator['test']('openssl02', ['test_main']))
+        self.addTest(mm.generator['test']('at_functions', ['test_main']))
 
 def load(mm):
 

@@ -3080,6 +3080,7 @@ class user_space(builder.Module):
                 'lib/libc/stdio/fgetln.c',
                 'lib/libc/stdlib/strtonum.c',
                 'lib/libc/string/strsep.c',
+                'lib/libc/sys/openat.c',
                 'lib/libc/xdr/xdr_array.c',
                 'lib/libc/xdr/xdr.c',
                 'lib/libc/xdr/xdr_float.c',
